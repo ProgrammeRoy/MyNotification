@@ -29,34 +29,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Created channel 1
         NotificationHelper.createNotificationChannel(
             applicationContext,
             NotificationManagerCompat.IMPORTANCE_MAX,
             true,
             CANAL.NOMBRE_IMPORTANCIA_MAX,
             "Canal de noticicacion principal como mensajes urgentes (con popup)",
-             true
+             true,
+            longArrayOf(0,1000,1000,1000,1000)
         )
 
+        //Created channel 2
         NotificationHelper.createNotificationChannel(
             applicationContext,
             NotificationManagerCompat.IMPORTANCE_DEFAULT,
             true,
             CANAL.NOMBRE_IMPORTANCIA_DEFAULT,
             "Canal de para mensajes informativos (solo mostrará el icono)",
-            false
+            false,
+            longArrayOf(0,2000,2000,2000,2000)
         )
 
+        //Created channel 3
         NotificationHelper.createNotificationChannel(
             applicationContext,
             NotificationManagerCompat.IMPORTANCE_MIN,
             true,
             CANAL.NOMBRE_IMPORTANCIA_MIN,
             "Canal de para mensajes con importancia minima",
-            false
+            false,
+            longArrayOf(0,3000,3000,3000,3000)
         )
     }
 
+    //Click button to selected channel
     fun sendOnChannel1(v: View) {
 
         var canal : String
@@ -68,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         } else if (rbIMPORTANCE_MAX.isChecked) {
             canal = CANAL.NOMBRE_IMPORTANCIA_MAX;
         } else {
-            throw Exception("Este timpo no está configurado en la importancia")
+            throw Exception("Este tipo no está configurado")
         }
 
         createSampleDataNotification(

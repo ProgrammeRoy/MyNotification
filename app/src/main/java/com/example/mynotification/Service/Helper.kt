@@ -26,7 +26,8 @@ object NotificationHelper {
         showBadge: Boolean,
         name: String,
         description: String,
-        enableVibration : Boolean
+        enableVibration : Boolean,
+        arrayVibration: LongArray
     ) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -34,7 +35,7 @@ object NotificationHelper {
             val channel = NotificationChannel(channelId, name, importance)
             channel.description = description
             channel.setShowBadge(showBadge)
-            channel.vibrationPattern = longArrayOf(0,2000,1000,2000)
+            channel.vibrationPattern = arrayVibration
 //            channel.enableVibration(enableVibration)
             //LIGHT DON'T WORK
 //            channel.enableLights(true)
@@ -78,6 +79,7 @@ object NotificationHelper {
             setAutoCancel(autoCancel)
             priority = myPriority
 
+            //Pass to Activity when user push notification
             val intent = Intent(context, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
